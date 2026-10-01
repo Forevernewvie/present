@@ -40,25 +40,28 @@ void main() {
     final repo = ConversationRepository(supabaseClient: supabase);
     
     final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    final morning = today.add(const Duration(hours: 9));
+    final evening = today.add(const Duration(hours: 19));
     
-    // 1. 첫 번째 대화 (아침 9시)
+    // 1. 첫 번째 대화 (같은 날 아침 9시)
     await repo.saveConversationTurn(
       userId: 'test_user',
       userText: '첫 번째 대화입니다',
-      userTime: now.subtract(const Duration(hours: 10)),
+      userTime: morning,
       aiText: '네 안녕하세요',
-      aiTime: now.subtract(const Duration(hours: 10, seconds: -2)),
+      aiTime: morning.add(const Duration(seconds: 2)),
     );
     
     expect(repo.localConversations.length, 1, reason: '첫 대화방이 생성되어야 함');
     
-    // 2. 두 번째 대화 (저녁 7시 - 10시간 경과) -> 1일 1방 룰에 따라 기존 방에 통합되어야 함
+    // 2. 두 번째 대화 (같은 날 저녁 7시 - 10시간 경과) -> 1일 1방 룰에 따라 기존 방에 통합되어야 함
     await repo.saveConversationTurn(
       userId: 'test_user',
       userText: '10시간 뒤 새로운 대화입니다',
-      userTime: now,
+      userTime: evening,
       aiText: '같은 방에 이어집니다',
-      aiTime: now.add(const Duration(seconds: 2)),
+      aiTime: evening.add(const Duration(seconds: 2)),
     );
     
     expect(repo.localConversations.length, 1, reason: '1일 1방 정책으로 인해 방이 분리되지 않아야 함');
