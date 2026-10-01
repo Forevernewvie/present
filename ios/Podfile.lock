@@ -1,0 +1,95 @@
+PODS:
+  - app_links (7.0.0):
+    - Flutter
+  - CwlCatchException (2.2.1):
+    - CwlCatchExceptionSupport (~> 2.2.1)
+  - CwlCatchExceptionSupport (2.2.1)
+  - Flutter (1.0.0)
+  - flutter_line_sdk (2.7.2):
+    - Flutter
+    - LineSDKSwift (~> 5.16)
+  - flutter_tts (0.0.1):
+    - Flutter
+  - integration_test (0.0.1):
+    - Flutter
+  - kakao_flutter_sdk_auth (2.0.1):
+    - Flutter
+  - kakao_flutter_sdk_common (2.0.1):
+    - Flutter
+  - LineSDKSwift (5.16.1):
+    - LineSDKSwift/Core (= 5.16.1)
+  - LineSDKSwift/Core (5.16.1)
+  - permission_handler_apple (9.4.8):
+    - Flutter
+  - shared_preferences_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
+  - speech_to_text (7.2.0):
+    - CwlCatchException
+    - Flutter
+    - FlutterMacOS
+  - url_launcher_ios (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - app_links (from `.symlinks/plugins/app_links/ios`)
+  - Flutter (from `Flutter`)
+  - flutter_line_sdk (from `.symlinks/plugins/flutter_line_sdk/ios`)
+  - flutter_tts (from `.symlinks/plugins/flutter_tts/ios`)
+  - integration_test (from `.symlinks/plugins/integration_test/ios`)
+  - kakao_flutter_sdk_auth (from `.symlinks/plugins/kakao_flutter_sdk_auth/ios`)
+  - kakao_flutter_sdk_common (from `.symlinks/plugins/kakao_flutter_sdk_common/ios`)
+  - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
+  - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
+  - speech_to_text (from `.symlinks/plugins/speech_to_text/darwin`)
+  - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
+
+SPEC REPOS:
+  trunk:
+    - CwlCatchException
+    - CwlCatchExceptionSupport
+    - LineSDKSwift
+
+EXTERNAL SOURCES:
+  app_links:
+    :path: ".symlinks/plugins/app_links/ios"
+  Flutter:
+    :path: Flutter
+  flutter_line_sdk:
+    :path: ".symlinks/plugins/flutter_line_sdk/ios"
+  flutter_tts:
+    :path: ".symlinks/plugins/flutter_tts/ios"
+  integration_test:
+    :path: ".symlinks/plugins/integration_test/ios"
+  kakao_flutter_sdk_auth:
+    :path: ".symlinks/plugins/kakao_flutter_sdk_auth/ios"
+  kakao_flutter_sdk_common:
+    :path: ".symlinks/plugins/kakao_flutter_sdk_common/ios"
+  permission_handler_apple:
+    :path: ".symlinks/plugins/permission_handler_apple/ios"
+  shared_preferences_foundation:
+    :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
+  speech_to_text:
+    :path: ".symlinks/plugins/speech_to_text/darwin"
+  url_launcher_ios:
+    :path: ".symlinks/plugins/url_launcher_ios/ios"
+
+SPEC CHECKSUMS:
+  app_links: 6d01271b3907b0ee7325c5297c75d697c4226c4d
+  CwlCatchException: 7acc161b299a6de7f0a46a6ed741eae2c8b4d75a
+  CwlCatchExceptionSupport: 54ccab8d8c78907b57f99717fb19d4cc3bce02dc
+  Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
+  flutter_line_sdk: f000fa90b45d8cfdc1ad3cc0cc6a2fcc0a39737e
+  flutter_tts: 91ad1884033cd95ef6e9338754adad54f01f090f
+  integration_test: 252f60fa39af5e17c3aa9899d35d908a0721b573
+  kakao_flutter_sdk_auth: 2080e7ae827d1f6854120826982ce30d93f82030
+  kakao_flutter_sdk_common: 4057450348450e6bf2261c60fdb5bdfe1371f24a
+  LineSDKSwift: 510e2842f86816cb26e4ab227a004320d844cb12
+  permission_handler_apple: ee2fe0fd04551b304eb002714ff067c371c822ed
+  shared_preferences_foundation: 5086985c1d43c5ba4d5e69a4e8083a389e2909e6
+  speech_to_text: 87bf9298952e8d9073be1b6aade6d5758db5170c
+  url_launcher_ios: bb13df5870e8c4234ca12609d04010a21be43dfa
+
+PODFILE CHECKSUM: ea863a4b0ba223d9d7bd5f00b0d6416000e238cb
+
+COCOAPODS: 1.14.3

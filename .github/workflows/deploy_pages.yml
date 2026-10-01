@@ -1,0 +1,41 @@
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches: ["main"]
+  # 수동 실행 허용 (Actions 탭에서 버튼으로 실행 가능)
+  workflow_dispatch:
+
+# GITHUB_TOKEN 권한 설정 (Pages 배포에 필수)
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 동시 배포 방지
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload docs artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # docs/ 폴더의 정적 HTML 페이지 배포
+          path: 'docs'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

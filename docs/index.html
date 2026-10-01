@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>마음선물 (Present) - 시니어를 위한 따뜻한 AI 말벗</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+  <style>
+    :root {
+      --primary-color: #2E7D32;
+      --primary-light: #E8F5E9;
+      --text-color: #212529;
+      --text-muted: #6C757D;
+      --bg-color: #FAF9F6;
+      --card-bg: #FFFFFF;
+      --border-color: #E9ECEF;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+      line-height: 1.6;
+      color: var(--text-color);
+      background-color: var(--bg-color);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background-color: var(--card-bg);
+      border-bottom: 1px solid var(--border-color);
+      padding: 18px 24px;
+    }
+    .header-container {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary-color);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    main {
+      flex: 1;
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+      width: 100%;
+    }
+    .hero {
+      text-align: center;
+      padding: 40px 20px;
+      background: white;
+      border-radius: 24px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+      margin-bottom: 32px;
+    }
+    .hero-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-size: 28px;
+      font-weight: 800;
+      color: #111;
+      margin-bottom: 12px;
+    }
+    .hero p {
+      font-size: 17px;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: white;
+      padding: 28px;
+      border-radius: 18px;
+      border: 1px solid var(--border-color);
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(46, 125, 50, 0.12);
+      border-color: var(--primary-color);
+    }
+    .card-icon {
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+    .card h2 {
+      font-size: 19px;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 8px;
+    }
+    .card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+    .card-link {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--primary-color);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      font-size: 13px;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-color);
+      background: white;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <a href="index.html" class="logo">🌿 마음선물 (Present)</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div class="hero-icon">👵💬✨</div>
+      <h1>마음선물 공식 정책 및 안내</h1>
+      <p>시니어의 하루를 다정하게 들어주는 AI 음성 말벗 서비스 '마음선물'의 정책 포털입니다.</p>
+    </div>
+
+    <div class="cards-grid">
+      <a href="privacy.html" class="card">
+        <div>
+          <div class="card-icon">🔒</div>
+          <h2>개인정보처리방침</h2>
+          <p>마이크 음성 데이터 즉시 파기 원칙, 수집 항목, 보관 및 파기 절차, 데이터 보호 조치를 확인하세요.</p>
+        </div>
+        <div class="card-link">자세히 보기 &rarr;</div>
+      </a>
+
+      <a href="terms.html" class="card">
+        <div>
+          <div class="card-icon">📜</div>
+          <h2>서비스 이용약관</h2>
+          <p>마음선물 서비스의 이용 조건, 비의료적 말벗 서비스 면책 조항, 이용자의 권리 및 의무를 확인하세요.</p>
+        </div>
+        <div class="card-link">자세히 보기 &rarr;</div>
+      </a>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2026 마음선물(Present). All rights reserved.
+  </footer>
+</body>
+</html>
