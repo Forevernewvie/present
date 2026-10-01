@@ -25,7 +25,7 @@ jobs:
           fetch-depth: 0
 
       - name: Set up Java 17
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: 'temurin'
           java-version: '17'
@@ -35,6 +35,12 @@ jobs:
         with:
           channel: 'stable'
           cache: true
+
+      - name: Create Env Files from Template
+        run: |
+          cp .env.example .env
+          cp .env.example .env.dev
+          cp .env.example .env.prod
 
       - name: Install Dependencies
         run: flutter pub get
