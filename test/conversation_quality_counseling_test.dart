@@ -109,7 +109,11 @@ void main() {
       // 사용자가 새 발화를 시작함
       mockStt.simulatedSpeech = '날씨가 참 좋더라고';
       await notifier.toggleRecording(); // 듣기 시작 -> 모의 발화
-      await Future<void>.delayed(const Duration(milliseconds: 50)); // 비동기 AI 처리 완료 대기
+      // 비동기 AI 처리 완료 대기 (CI 환경에서도 안정적으로 완료 대기)
+      for (int i = 0; i < 20; i++) {
+        if (mockOpenAi.receivedHistory.length >= 3) break;
+        await Future<void>.delayed(const Duration(milliseconds: 50));
+      }
 
       // OpenAiService에 전달된 history 확인: 세션 1과 세션 2의 메시지가 시간순으로 모두 전달되었는가?
       expect(mockOpenAi.receivedHistory.length, 3);

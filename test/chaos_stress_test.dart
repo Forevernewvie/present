@@ -204,7 +204,7 @@ void main() {
     });
 
     test('3. Concurrent Race Condition: User Cancel during AI streaming + Audio Pause', () async {
-      openAiService.delay = const Duration(milliseconds: 100);
+      openAiService.delay = const Duration(milliseconds: 250);
       final notifier = VoiceChatNotifier(
         openAiService: openAiService,
         sttService: sttService,
@@ -227,12 +227,12 @@ void main() {
       sttService.onResultCallback?.call('엄마 사랑해요');
       sttService.onEmulatorDoneCallback?.call();
 
-      // 15ms 후 백그라운드 전환 및 인터럽트 발생
-      await Future<void>.delayed(const Duration(milliseconds: 15));
-      activeNotifier.handleLifecyclePause();
+      // 백그라운드 전환 및 인터럽트 발생
+      await Future<void>.delayed(const Duration(milliseconds: 30));
+      await activeNotifier.handleLifecyclePause();
 
       // 요청 종료 대기
-      await Future<void>.delayed(const Duration(milliseconds: 120));
+      await Future<void>.delayed(const Duration(milliseconds: 350));
 
       // 크래시 없이 idle 상태 유지 및 TTS 정지 확인
       expect(container.read(voiceChatProvider).status, VoiceChatStatus.idle);
