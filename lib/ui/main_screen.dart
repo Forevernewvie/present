@@ -168,7 +168,7 @@ class _MainScreenState extends ConsumerState<MainScreen>
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text('마음선물', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
+              const Text('Present', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
               const SizedBox(width: 8),
               InkWell(
                 onTap: () => PersonaBottomSheet.show(context),
@@ -345,7 +345,7 @@ class _MainScreenState extends ConsumerState<MainScreen>
             Padding(
               padding: const EdgeInsets.only(bottom: 16.0, left: 24.0, right: 24.0),
               child: Text(
-                '💡 마음선물 AI는 정서적 말벗이며, 전문적인 의료·약학·법률 상담을 대신하지 않습니다.',
+                '💡 Present AI는 정서적 말벗이며, 전문적인 의료·약학·법률 상담을 대신하지 않습니다.',
                 style: TextStyle(
                   fontSize: 12,
                   color: Colors.grey.shade600,

@@ -1,4 +1,4 @@
-# 🌿 마음선물 (Present)
+# 🌿 Present
 
 > **"시니어를 위한 따뜻한 AI 말벗 대화 서비스"**  
 > 복잡한 스마트폰 조작 없이, 자녀와 통화하듯 편안한 음성으로 대화하고 하루 일상을 달력에 따뜻하게 기록하는 효도 서비스입니다.
@@ -37,7 +37,7 @@
 
 ## 📜 공식 정책 및 약관
 
-* 🌐 [마음선물 공식 정책 허브](https://forevernewvie.github.io/present/)
+* 🌐 [Present 공식 정책 허브](https://forevernewvie.github.io/present/)
 * 🔒 [개인정보처리방침 (Privacy Policy)](https://forevernewvie.github.io/present/privacy.html)
 * 📜 [서비스 이용약관 (Terms of Service)](https://forevernewvie.github.io/present/terms.html)
 

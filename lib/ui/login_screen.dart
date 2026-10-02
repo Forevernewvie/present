@@ -291,7 +291,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         onTap: () => _showPolicyDialog(
                           context,
                           '서비스 이용약관',
-                          '제1조 (목적)\n본 약관은 마음선물이 제공하는 시니어 AI 말벗 대화 서비스의 이용 조건 및 절차를 규정합니다.\n\n'
+                          '제1조 (목적)\n본 약관은 Present가 제공하는 시니어 AI 말벗 대화 서비스의 이용 조건 및 절차를 규정합니다.\n\n'
                           '제2조 (서비스 내용)\n인공지능 기반의 따뜻한 음성 대화 및 캘린더 기록 보관 기능을 제공합니다.',
                         ),
                         child: Text(
@@ -312,7 +312,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         onTap: () => _showPolicyDialog(
                           context,
                           '개인정보처리방침',
-                          '마음선물 개인정보처리방침 요약:\n\n'
+                          'Present 개인정보처리방침 요약:\n\n'
                           '1. 음성 데이터: 마이크로 입력된 음성은 기기 내에서 텍스트로 변환 즉시 파기되며 음성 파일 원본은 서버에 저장되지 않습니다.\n\n'
                           '2. 계정 탈퇴: 이용자는 앱 내 설정에서 언제든지 회원 탈퇴 및 데이터 영구 삭제를 요청할 수 있습니다.',
                         ),

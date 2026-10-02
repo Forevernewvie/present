@@ -183,7 +183,7 @@ class AppSettingsDialog extends ConsumerWidget {
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
-                        '마음선물 AI의 답변은 정서적 말벗을 위한 것이며, 전문적인 의료·약학·법률 상담을 대체할 수 없습니다.',
+                        'Present AI의 답변은 정서적 말벗을 위한 것이며, 전문적인 의료·약학·법률 상담을 대체할 수 없습니다.',
                         style: TextStyle(fontSize: 13, color: Colors.brown.shade800, height: 1.35),
                       ),
                     ),
@@ -229,7 +229,7 @@ class AppSettingsDialog extends ConsumerWidget {
                 onTap: () => _showPolicyDialog(
                   context,
                   '개인정보처리방침',
-                  '마음선물은 이용자의 개인정보 및 프라이버시를 최우선으로 보호합니다.\n\n'
+                  'Present는 이용자의 개인정보 및 프라이버시를 최우선으로 보호합니다.\n\n'
                   '1. 음성 데이터 처리: 사용자가 마이크를 통해 발화한 오디오는 기기 내 STT 엔진을 통해 텍스트로 변환 즉시 파기되며, 음성 파일 원본은 서버에 저장되지 않습니다.\n\n'
                   '2. 대화 기록: 이용자가 직접 확인하는 달력 일기 제공을 위해 변환된 텍스트만 안전하게 암호화되어 보관됩니다.\n\n'
                   '3. 파기 권리: 이용자는 언제든지 로그아웃 또는 회원 탈퇴를 통해 모든 데이터를 영구 삭제할 수 있습니다.',
@@ -245,7 +245,7 @@ class AppSettingsDialog extends ConsumerWidget {
                 onTap: () => _showPolicyDialog(
                   context,
                   '서비스 이용약관',
-                  '제1조 (목적)\n본 약관은 마음선물(이하 "서비스")이 제공하는 시니어 AI 말벗 대화 서비스의 이용 조건 및 절차를 규정합니다.\n\n'
+                  '제1조 (목적)\n본 약관은 Present(이하 "서비스")가 제공하는 시니어 AI 말벗 대화 서비스의 이용 조건 및 절차를 규정합니다.\n\n'
                   '제2조 (서비스의 내용)\n서비스는 인공지능 기반의 음성 대화 및 일상 기록 보관 기능을 제공합니다.\n\n'
                   '제3조 (이용자의 의무)\n이용자는 타인의 명예를 훼손하거나 불법적인 목적으로 서비스를 이용하여서는 아니 됩니다.',
                 ),
