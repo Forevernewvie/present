@@ -73,6 +73,7 @@ class ThrowingCancelledAiService extends OpenAiService {
     required String userMessage,
     List<dynamic> history = const [],
     String persona = 'child',
+    String? parentTitle,
     CancellationToken? cancelToken,
   }) async {
     throw CancelledException('취소되었습니다');

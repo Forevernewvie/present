@@ -88,6 +88,7 @@ class MockOpenAiService extends OpenAiService {
     required String userMessage,
     List<dynamic> history = const [],
     String persona = 'child',
+    String? parentTitle,
     CancellationToken? cancelToken,
   }) async {
     if (errorToThrow != null) throw errorToThrow!;

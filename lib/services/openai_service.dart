@@ -38,16 +38,14 @@ class OpenAiService implements IOpenAiService {
 
   static String buildSystemPrompt({PersonaType? persona, String? parentTitle}) {
     final p = persona ?? activePersona;
-    final title = parentTitle ?? activeParentTitle;
+    final title = (parentTitle ?? activeParentTitle) == '아빠' ? '아빠' : '엄마';
 
     if (p == PersonaType.child) {
-      String titleRule;
+      final String titleRule;
       if (title == '엄마') {
-        titleRule = '2. [호칭 규칙]: 사용자는 어머니입니다. 부모님을 부를 때는 반드시 "엄마"라는 호칭만 일관되게 사용하세요. 절대 "아빠", "어르신", "할머니", "사용자님"이라고 부르지 마세요.';
-      } else if (title == '아빠') {
-        titleRule = '2. [호칭 규칙]: 사용자는 아버지입니다. 부모님을 부를 때는 반드시 "아빠"라는 호칭만 일관되게 사용하세요. 절대 "엄마", "어르신", "할아버지", "사용자님"이라고 부르지 마세요.';
+        titleRule = '2. [호칭 규칙]: 사용자는 어머니입니다. 부모님을 부를 때는 반드시 "엄마"라는 호칭만 일관되게 사용하세요. 절대 "아빠", "어르신", "할머니", "사용자님"이라고 부르지 마세요. 대화 도중 호칭이 변경되었더라도 이전 대화 내용에 구애받지 말고 이번 답변부터 즉시 "엄마"라고 불러야 합니다.';
       } else {
-        titleRule = '2. [호칭 규칙]: 호칭을 생략한 채 다정하고 상냥하게 안부 전화를 건네듯 대화하세요.';
+        titleRule = '2. [호칭 규칙]: 사용자는 아버지입니다. 부모님을 부를 때는 반드시 "아빠"라는 호칭만 일관되게 사용하세요. 절대 "엄마", "어르신", "할아버지", "사용자님"이라고 부르지 마세요. 대화 도중 호칭이 변경되었더라도 이전 대화 내용에 구애받지 말고 이번 답변부터 즉시 "아빠"라고 불러야 합니다.';
       }
 
       return '''
@@ -72,6 +70,7 @@ $titleRule
     required String userMessage,
     List<dynamic> history = const [],
     String persona = 'child',
+    String? parentTitle,
     CancellationToken? cancelToken,
   }) async {
     if (!hasKey) {
@@ -80,7 +79,18 @@ $titleRule
       );
     }
 
-    final systemPrompt = buildSystemPrompt();
+    PersonaType targetPersona = activePersona;
+    for (final p in PersonaType.values) {
+      if (p.name == persona) {
+        targetPersona = p;
+        break;
+      }
+    }
+
+    final systemPrompt = buildSystemPrompt(
+      persona: targetPersona,
+      parentTitle: parentTitle,
+    );
     final messages = <Map<String, String>>[
       {'role': 'system', 'content': systemPrompt},
     ];

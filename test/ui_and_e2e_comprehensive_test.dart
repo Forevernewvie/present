@@ -331,19 +331,13 @@ void main() {
       // Sheet should have popped
       expect(find.text('어떻게 불러드릴까요?'), findsNothing);
 
-      // Open sheet again and tap '호칭 없음'
+      // Open sheet again and verify '호칭 없음' is completely removed
       await tester.tap(find.text('Open Setup'));
       await tester.pumpAndSettle();
 
-      await tester.tap(find.text('호칭 없음'));
-      await tester.pumpAndSettle();
+      expect(find.text('호칭 없음'), findsNothing);
 
-      expect(find.text('어떻게 불러드릴까요?'), findsNothing);
-
-      // Open sheet again and tap '엄마'
-      await tester.tap(find.text('Open Setup'));
-      await tester.pumpAndSettle();
-
+      // Tap '엄마'
       await tester.tap(find.text('엄마'));
       await tester.pumpAndSettle();
 
@@ -373,12 +367,10 @@ void main() {
       expect(find.text('호칭 및 대화 상대 설정'), findsOneWidget);
       expect(find.text('부모님 호칭'), findsOneWidget);
       expect(find.text('대화 상대 (페르소나)'), findsOneWidget);
+      expect(find.text('호칭 없음'), findsNothing);
 
       // Select title options
       await tester.tap(find.text('아빠'));
-      await tester.pumpAndSettle();
-
-      await tester.tap(find.text('호칭 없음'));
       await tester.pumpAndSettle();
 
       await tester.tap(find.text('엄마'));

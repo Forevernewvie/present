@@ -5,6 +5,7 @@ abstract class IOpenAiService {
     required String userMessage,
     List<dynamic> history = const [],
     String persona = 'child',
+    String? parentTitle,
     CancellationToken? cancelToken,
   });
 }

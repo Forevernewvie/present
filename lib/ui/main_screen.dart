@@ -184,9 +184,7 @@ class _MainScreenState extends ConsumerState<MainScreen>
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        settings.parentTitle == '엄마'
-                            ? '👩 엄마'
-                            : (settings.parentTitle == '아빠' ? '👨 아빠' : '💬 호칭 없음'),
+                        settings.parentTitle == '아빠' ? '👨 아빠' : '👩 엄마',
                         style: TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.bold,

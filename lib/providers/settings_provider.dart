@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../services/openai_service.dart';
 
 class SettingsState {
-  final String parentTitle; // '엄마', '아빠', 'none'
+  final String parentTitle; // '엄마', '아빠'
   final PersonaType persona;
   final bool isConfigured;
 
@@ -19,7 +19,9 @@ class SettingsState {
     bool? isConfigured,
   }) {
     return SettingsState(
-      parentTitle: parentTitle ?? this.parentTitle,
+      parentTitle: parentTitle != null
+          ? (parentTitle == '아빠' ? '아빠' : '엄마')
+          : this.parentTitle,
       persona: persona ?? this.persona,
       isConfigured: isConfigured ?? this.isConfigured,
     );
@@ -54,7 +56,7 @@ class SettingsNotifier extends Notifier<SettingsState> {
         }
       }
 
-      final finalTitle = savedTitle ?? '엄마';
+      final finalTitle = (savedTitle == '아빠') ? '아빠' : '엄마';
       state = state.copyWith(
         parentTitle: finalTitle,
         persona: loadedPersona,
@@ -69,14 +71,15 @@ class SettingsNotifier extends Notifier<SettingsState> {
   }
 
   Future<void> setParentTitle(String title) async {
+    final normalizedTitle = (title == '아빠') ? '아빠' : '엄마';
     state = state.copyWith(
-      parentTitle: title,
+      parentTitle: normalizedTitle,
       isConfigured: true,
     );
-    OpenAiService.activeParentTitle = title;
+    OpenAiService.activeParentTitle = normalizedTitle;
     try {
       final prefs = await SharedPreferences.getInstance();
-      await prefs.setString(_keyParentTitle, title);
+      await prefs.setString(_keyParentTitle, normalizedTitle);
       await prefs.setBool(_keyConfigured, true);
     } catch (_) {}
   }

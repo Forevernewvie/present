@@ -278,9 +278,7 @@ class AppSettingsDialog extends ConsumerWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      ref.watch(settingsProvider).parentTitle == '엄마'
-                          ? '👩 엄마'
-                          : (ref.watch(settingsProvider).parentTitle == '아빠' ? '👨 아빠' : '설정 안 함'),
+                      ref.watch(settingsProvider).parentTitle == '아빠' ? '👨 아빠' : '👩 엄마',
                       style: TextStyle(fontSize: 13, color: theme.colorScheme.primary, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(width: 4),

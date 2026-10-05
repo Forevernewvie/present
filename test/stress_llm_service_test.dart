@@ -72,6 +72,7 @@ class MockOpenAiDelayed extends OpenAiService {
     required String userMessage,
     List<dynamic> history = const [],
     String persona = 'child',
+    String? parentTitle,
     CancellationToken? cancelToken,
   }) async {
     await Future.delayed(delay);

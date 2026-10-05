@@ -100,7 +100,7 @@ class PersonaBottomSheet extends ConsumerWidget {
                     },
                   ),
                 ),
-                const SizedBox(width: 12),
+                const SizedBox(width: 14),
                 Expanded(
                   child: _TitleOptionCard(
                     icon: '👨',
@@ -108,19 +108,6 @@ class PersonaBottomSheet extends ConsumerWidget {
                     isSelected: settings.parentTitle == '아빠',
                     onTap: () {
                       ref.read(settingsProvider.notifier).setParentTitle('아빠');
-                      if (initialSetupOnly) Navigator.pop(context);
-                    },
-                  ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: _TitleOptionCard(
-                    icon: '💬',
-                    label: '호칭 없음',
-                    subtitle: '다정한 존댓말',
-                    isSelected: settings.parentTitle == 'none',
-                    onTap: () {
-                      ref.read(settingsProvider.notifier).setParentTitle('none');
                       if (initialSetupOnly) Navigator.pop(context);
                     },
                   ),
@@ -207,14 +194,12 @@ class PersonaBottomSheet extends ConsumerWidget {
 class _TitleOptionCard extends StatelessWidget {
   final String icon;
   final String label;
-  final String? subtitle;
   final bool isSelected;
   final VoidCallback onTap;
 
   const _TitleOptionCard({
     required this.icon,
     required this.label,
-    this.subtitle,
     required this.isSelected,
     required this.onTap,
   });
@@ -253,17 +238,6 @@ class _TitleOptionCard extends StatelessWidget {
                   color: isSelected ? primaryColor : Colors.black87,
                 ),
               ),
-              if (subtitle != null) ...[
-                const SizedBox(height: 4),
-                Text(
-                  subtitle!,
-                  style: TextStyle(
-                    fontSize: 11,
-                    color: isSelected ? primaryColor : Colors.grey[500],
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ],
             ],
           ),
         ),

@@ -71,6 +71,7 @@ class AndroidMockOpenAiService implements IOpenAiService {
     required String userMessage,
     List<dynamic> history = const [],
     String persona = 'child',
+    String? parentTitle,
     CancellationToken? cancelToken,
   }) async {
     return '안드로이드 정상 응답입니다.';

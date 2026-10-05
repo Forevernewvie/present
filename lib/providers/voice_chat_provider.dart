@@ -14,6 +14,7 @@ import '../services/cancellation_token.dart';
 import '../models/chat_message_model.dart';
 import 'auth_provider.dart';
 import 'conversation_list_provider.dart';
+import 'settings_provider.dart';
 
 enum VoiceChatStatus {
   idle,       // 대기 상태 ("말씀을 원하시면 버튼을 눌러주세요")
@@ -237,10 +238,13 @@ class VoiceChatNotifier extends Notifier<VoiceChatState> {
         ? allRecentMessages.sublist(allRecentMessages.length - 8)
         : allRecentMessages;
 
+    final settings = ref.read(settingsProvider);
     try {
       reply = await _openAiService.getAiReply(
         userMessage: userText,
         history: recentHistory,
+        persona: settings.persona.name,
+        parentTitle: settings.parentTitle,
         cancelToken: cancelToken,
       );
       aiTime = DateTime.now();
