@@ -181,7 +181,7 @@ class VoiceChatNotifier extends Notifier<VoiceChatState> {
           state = state.copyWith(recognizedText: text);
         }
       },
-      pauseFor: const Duration(seconds: 2),
+      pauseFor: const Duration(milliseconds: 3500),
       onEmulatorDone: () {
         if (state.status == VoiceChatStatus.recording) {
           _stopAndProcessSpeech();

@@ -40,7 +40,13 @@ class SttService implements ISttService {
         onResult: (result) {
           onResult(result.recognizedWords);
         },
-        listenOptions: SpeechListenOptions(localeId: 'ko_KR'),
+        listenOptions: SpeechListenOptions(
+          localeId: 'ko_KR',
+          listenMode: ListenMode.dictation,
+          pauseFor: pauseFor,
+          partialResults: true,
+          cancelOnError: false,
+        ),
         pauseFor: pauseFor,
       );
     } else {
