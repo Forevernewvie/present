@@ -194,13 +194,19 @@ class VoiceChatNotifier extends Notifier<VoiceChatState> {
   Future<void> _stopAndProcessSpeech() async {
     if (state.status != VoiceChatStatus.recording) return; // 중복 호출 방지
 
+    final userText = state.recognizedText.trim();
+    final userTime = DateTime.now();
+
+    // 1. 상태를 즉시 'thinking'으로 전환하여 STT stop() 콜백에 의한 re-entrancy 원천 차단
+    state = state.copyWith(
+      status: VoiceChatStatus.thinking,
+      userSpeechTime: userTime,
+    );
+
     try {
       await _sttService.stop();
     } catch (_) {}
 
-    String userText = state.recognizedText.trim();
-    
-    // [시뮬레이터 개런티용 코드] 마이크 연동 문제로 인식이 안 됐을 때 강제로 테스트 문장을 집어넣습니다.
     // 음성 인식이 비어있는 경우
     if (userText.isEmpty) {
       debugPrint('음성 인식이 비어있습니다. 다시 듣기를 시작합니다.');
@@ -210,13 +216,6 @@ class VoiceChatNotifier extends Notifier<VoiceChatState> {
       }
       return;
     }
-
-    // 1. 상태를 'thinking'으로 전환
-    final userTime = DateTime.now();
-    state = state.copyWith(
-      status: VoiceChatStatus.thinking,
-      userSpeechTime: userTime,
-    );
 
     final currentUser = ref.read(authProvider).asData?.value;
     final userId = currentUser?.id;
