@@ -11,4 +11,8 @@ class Env {
 
   static String get openAiApiKey => dotenv.isInitialized ? dotenv.env['OPENAI_API_KEY'] ?? '' : '';
   static String get geminiApiKey => dotenv.isInitialized ? dotenv.env['GEMINI_API_KEY'] ?? '' : '';
+
+  // 공식 웹사이트 정책 및 약관 URL (GitHub Pages)
+  static const String privacyPolicyUrl = 'https://forevernewvie.github.io/present/privacy.html';
+  static const String termsOfServiceUrl = 'https://forevernewvie.github.io/present/terms.html';
 }

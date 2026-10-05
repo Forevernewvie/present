@@ -47,6 +47,7 @@ dependencies:
   http: ^1.2.2
   flutter_dotenv: ^6.0.1
   shared_preferences: ^2.5.5
+  url_launcher: ^6.3.2
 
 dependency_overrides:
   permission_handler_android: 13.0.1

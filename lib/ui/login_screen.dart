@@ -3,6 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
+import 'package:url_launcher/url_launcher.dart';
+import '../config/env.dart';
 import '../providers/auth_provider.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
@@ -122,23 +124,79 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     */
   }
 
-  void _showPolicyDialog(BuildContext context, String title, String content) {
+  void _showPolicyDialog(BuildContext context, String title, String content, {String? webUrl}) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+        title: Row(
+          children: [
+            Expanded(child: Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18))),
+            if (webUrl != null)
+              IconButton(
+                icon: const Icon(Icons.open_in_new, size: 20),
+                tooltip: '웹페이지 열기',
+                onPressed: () => launchUrl(Uri.parse(webUrl), mode: LaunchMode.inAppBrowserView),
+              ),
+          ],
+        ),
         content: SizedBox(
           width: double.maxFinite,
-          height: 320,
+          height: 340,
           child: SingleChildScrollView(
-            child: Text(
-              content,
-              style: const TextStyle(fontSize: 14, height: 1.5, color: Colors.black87),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  content,
+                  style: const TextStyle(fontSize: 14, height: 1.5, color: Colors.black87),
+                ),
+                if (webUrl != null) ...[
+                  const SizedBox(height: 16),
+                  InkWell(
+                    onTap: () => launchUrl(Uri.parse(webUrl), mode: LaunchMode.inAppBrowserView),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                      decoration: BoxDecoration(
+                        color: Colors.green.shade50,
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(color: Colors.green.shade200),
+                      ),
+                      child: Row(
+                        children: [
+                          const Icon(Icons.language, size: 18, color: Color(0xFF2E7D32)),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: Text(
+                              webUrl,
+                              style: const TextStyle(
+                                fontSize: 12,
+                                color: Color(0xFF2E7D32),
+                                decoration: TextDecoration.underline,
+                                fontWeight: FontWeight.w600,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          const Icon(Icons.chevron_right, size: 16, color: Color(0xFF2E7D32)),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ],
             ),
           ),
         ),
         actions: [
+          if (webUrl != null)
+            TextButton.icon(
+              icon: const Icon(Icons.open_in_new, size: 16),
+              label: const Text('웹사이트에서 보기'),
+              onPressed: () {
+                launchUrl(Uri.parse(webUrl), mode: LaunchMode.inAppBrowserView);
+              },
+            ),
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
             child: const Text('확인', style: TextStyle(fontWeight: FontWeight.bold)),
@@ -293,6 +351,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           '서비스 이용약관',
                           '제1조 (목적)\n본 약관은 Present가 제공하는 시니어 AI 말벗 대화 서비스의 이용 조건 및 절차를 규정합니다.\n\n'
                           '제2조 (서비스 내용)\n인공지능 기반의 따뜻한 음성 대화 및 캘린더 기록 보관 기능을 제공합니다.',
+                          webUrl: Env.termsOfServiceUrl,
                         ),
                         child: Text(
                           '이용약관',
@@ -315,6 +374,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           'Present 개인정보처리방침 요약:\n\n'
                           '1. 음성 데이터: 마이크로 입력된 음성은 기기 내에서 텍스트로 변환 즉시 파기되며 음성 파일 원본은 서버에 저장되지 않습니다.\n\n'
                           '2. 계정 탈퇴: 이용자는 앱 내 설정에서 언제든지 회원 탈퇴 및 데이터 영구 삭제를 요청할 수 있습니다.',
+                          webUrl: Env.privacyPolicyUrl,
                         ),
                         child: Text(
                           '개인정보처리방침',

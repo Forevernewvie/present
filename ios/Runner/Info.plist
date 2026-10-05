@@ -57,6 +57,9 @@
 	<string>Main</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<!-- 웹 브라우저 및 링크 열기 -->
+		<string>https</string>
+		<string>http</string>
 		<!-- 카카오톡으로 로그인 -->
 		<string>kakaokompassauth</string>
 		<!-- 카카오톡 공유 -->
