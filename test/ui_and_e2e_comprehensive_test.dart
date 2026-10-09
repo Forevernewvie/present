@@ -480,7 +480,7 @@ void main() {
       expect(find.text('네트워크 연결이 불안정합니다.'), findsOneWidget);
     });
 
-    testWidgets('AppBar buttons open PersonaBottomSheet and CalendarBottomSheet', (tester) async {
+    testWidgets('AppBar hides persona chip and settings opens PersonaBottomSheet and CalendarBottomSheet', (tester) async {
       tester.view.physicalSize = const Size(1080, 2400);
       tester.view.devicePixelRatio = 1.0;
       addTearDown(() {
@@ -505,18 +505,20 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      // 1. Tap title chip [ 👩 엄마 ▾ ]
-      await tester.tap(find.text('👩 엄마'));
-      await tester.pumpAndSettle();
-      expect(find.text('호칭 및 대화 상대 설정'), findsOneWidget);
-      await tester.tap(find.text('확인'));
-      await tester.pumpAndSettle();
+      // 1. Verify persona chip is safely hidden from MainScreen AppBar
+      expect(find.text('👩 엄마'), findsNothing);
+      expect(find.text('👨 아빠'), findsNothing);
 
-      // 2. Tap settings icon
+      // 2. Tap settings icon -> opens AppSettingsDialog and can navigate to PersonaBottomSheet
       await tester.tap(find.byIcon(Icons.settings_outlined));
       await tester.pumpAndSettle();
       expect(find.text('앱 설정 및 정보'), findsOneWidget);
-      await tester.tap(find.byIcon(Icons.close));
+      expect(find.text('호칭 및 대화 상대'), findsOneWidget);
+
+      await tester.tap(find.text('호칭 및 대화 상대'));
+      await tester.pumpAndSettle();
+      expect(find.text('호칭 및 대화 상대 설정'), findsOneWidget);
+      await tester.tap(find.text('확인'));
       await tester.pumpAndSettle();
 
       // 3. Tap calendar icon
@@ -565,7 +567,7 @@ void main() {
       expect(mockVoice.lifecyclePauseCount, 2);
     });
 
-    testWidgets('MainScreen displays 아빠 chip when title is 아빠', (tester) async {
+    testWidgets('MainScreen hides persona chip and AppSettingsDialog displays configured title', (tester) async {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
@@ -581,6 +583,12 @@ void main() {
           ),
         ),
       );
+      await tester.pumpAndSettle();
+      // 메인 화면에서는 상단 칩이 숨김 처리되어 노출되지 않음
+      expect(find.text('👨 아빠'), findsNothing);
+
+      // 설정 화면을 열면 설정 항목에서 '👨 아빠'가 정상 표시됨
+      await tester.tap(find.byIcon(Icons.settings_outlined));
       await tester.pumpAndSettle();
       expect(find.text('👨 아빠'), findsOneWidget);
     });

@@ -129,7 +129,6 @@ class _MainScreenState extends ConsumerState<MainScreen>
     });
 
     final voiceState = ref.watch(voiceChatProvider);
-    final settings = ref.watch(settingsProvider);
     final theme = Theme.of(context);
 
     // 4단계 상태 머신에 따른 안내 문구
@@ -162,44 +161,7 @@ class _MainScreenState extends ConsumerState<MainScreen>
       backgroundColor: theme.colorScheme.background,
       appBar: AppBar(
         titleSpacing: 16,
-        title: FittedBox(
-          fit: BoxFit.scaleDown,
-          alignment: Alignment.centerLeft,
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Text('Present', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
-              const SizedBox(width: 8),
-              InkWell(
-                onTap: () => PersonaBottomSheet.show(context),
-                borderRadius: BorderRadius.circular(20),
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                  decoration: BoxDecoration(
-                    color: theme.colorScheme.primary.withOpacity(0.12),
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: theme.colorScheme.primary.withOpacity(0.3)),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        settings.parentTitle == '아빠' ? '👨 아빠' : '👩 엄마',
-                        style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.bold,
-                          color: theme.colorScheme.primary,
-                        ),
-                      ),
-                      const SizedBox(width: 2),
-                      Icon(Icons.arrow_drop_down, size: 18, color: theme.colorScheme.primary),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
+        title: const Text('Present', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
         backgroundColor: theme.colorScheme.background,
         elevation: 0,
         centerTitle: false,
@@ -354,6 +316,40 @@ class _MainScreenState extends ConsumerState<MainScreen>
             ),
           ],
         ),
+        ),
+      ),
+    );
+  }
+
+  /// [백업본]: 기존 AppBar 상단에 노출되던 페르소나/호칭 칩 위젯입니다.
+  /// 안정성 및 직관적 UX를 위해 현재는 설정(AppSettingsDialog)에만 노출되도록 숨김 처리되었습니다.
+  /// 필요 시 언제든 다시 연결할 수 있습니다.
+  // ignore: unused_element
+  Widget _buildAppBarPersonaChipBackup(BuildContext context, ThemeData theme, dynamic settings) {
+    return InkWell(
+      onTap: () => PersonaBottomSheet.show(context),
+      borderRadius: BorderRadius.circular(20),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        decoration: BoxDecoration(
+          color: theme.colorScheme.primary.withOpacity(0.12),
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: theme.colorScheme.primary.withOpacity(0.3)),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              settings.parentTitle == '아빠' ? '👨 아빠' : '👩 엄마',
+              style: TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.bold,
+                color: theme.colorScheme.primary,
+              ),
+            ),
+            const SizedBox(width: 2),
+            Icon(Icons.arrow_drop_down, size: 18, color: theme.colorScheme.primary),
+          ],
         ),
       ),
     );
