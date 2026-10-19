@@ -75,6 +75,7 @@ class PresentApp extends ConsumerWidget {
 
     return MaterialApp.router(
       title: 'Present',
+      debugShowCheckedModeBanner: false,
       routerConfig: router,
       theme: ThemeData(
         useMaterial3: true,

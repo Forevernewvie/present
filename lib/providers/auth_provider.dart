@@ -34,7 +34,8 @@ class AuthNotifier extends AsyncNotifier<UserModel?> {
               .from('users')
               .select('id, kakao_id, name, created_at')
               .eq('id', user.id)
-              .maybeSingle();
+              .maybeSingle()
+              .timeout(const Duration(seconds: 2));
           if (profile != null && profile['id'] != null && profile['id'].toString().isNotEmpty) {
             return UserModel.fromJson(profile);
           }
