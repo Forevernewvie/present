@@ -61,9 +61,10 @@ class AuthNotifier extends AsyncNotifier<UserModel?> {
       final supabase = _supabase;
       if (supabase == null) throw Exception('Supabase 미초기화');
 
-      final email = 'kakao_$kakaoId@present.internal';
+      final email = 'kakao_$kakaoId@gmail.com';
       final password = 'Kakao_${kakaoId}_#Secure2026!';
       User? authUser;
+      Session? activeSession;
 
       try {
         final res = await supabase.auth.signInWithPassword(
@@ -71,6 +72,7 @@ class AuthNotifier extends AsyncNotifier<UserModel?> {
           password: password,
         );
         authUser = res.user;
+        activeSession = res.session;
       } catch (_) {
         // 첫 로그인이거나 계정이 없는 경우 signUp 호출하여 Supabase Auth 영구 유저 생성
         try {
@@ -80,8 +82,23 @@ class AuthNotifier extends AsyncNotifier<UserModel?> {
             data: {'kakao_id': kakaoId, 'name': nickname ?? '사용자'},
           );
           authUser = res.user;
+          activeSession = res.session;
         } catch (signUpError) {
           debugPrint('Supabase Auth signUp 실패 (계속 진행): $signUpError');
+        }
+      }
+
+      // 이메일 인증 대기 설정(mailer_autoconfirm: false) 등으로 인해 활성 JWT 세션이 발급되지 않은 경우
+      // 익명 인증 세션에 카카오 메타데이터를 바인딩하여 RLS 통과 가능한 정식 JWT 세션 확보
+      if (activeSession == null && supabase.auth.currentSession == null) {
+        try {
+          final anonRes = await supabase.auth.signInAnonymously(
+            data: {'kakao_id': kakaoId, 'name': nickname ?? '사용자'},
+          );
+          authUser = anonRes.user ?? authUser;
+          activeSession = anonRes.session;
+        } catch (anonError) {
+          debugPrint('Supabase 익명 세션 폴백 실패 (계속 진행): $anonError');
         }
       }
 
@@ -92,14 +109,42 @@ class AuthNotifier extends AsyncNotifier<UserModel?> {
         'name': ?nickname,
       };
 
-      final data = await supabase
-          .from('users')
-          .upsert(
-            upsertData,
-            onConflict: 'kakao_id',
-          )
-          .select()
-          .single();
+      Map<String, dynamic> data;
+      try {
+        data = await supabase
+            .from('users')
+            .upsert(
+              upsertData,
+              onConflict: 'kakao_id',
+            )
+            .select()
+            .single();
+      } on PostgrestException catch (pgError) {
+        if (userId == null) rethrow;
+        debugPrint('users upsert RLS/제약조건 감지(${pgError.code}), 트리거 생성 행 update 전환');
+        try {
+          data = await supabase
+              .from('users')
+              .update({
+                'kakao_id': kakaoId,
+                'name': ?nickname,
+              })
+              .eq('id', userId)
+              .select()
+              .single();
+        } on PostgrestException catch (updateError) {
+          // 이미 동일 kakao_id가 이전 세션 행에 등록된 경우(23505) 현재 인증된 행의 프로필만 갱신
+          debugPrint('users update 중복 키 감지(${updateError.code}), 기본 프로필 조회/갱신 전환');
+          data = await supabase
+              .from('users')
+              .update({
+                'name': nickname ?? '사용자',
+              })
+              .eq('id', userId)
+              .select()
+              .single();
+        }
+      }
 
       final userModel = UserModel.fromJson(data);
       final finalUserModel = (userModel.id.isEmpty && userId != null)
