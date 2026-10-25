@@ -34,9 +34,9 @@
             </intent-filter>
         </activity>
 
-        <!-- 카카오 로그인 Redirect URI 커스텀 URL 스킴 액티비티 -->
+        <!-- 카카오 로그인 Redirect URI 커스텀 URL 스킴 액티비티 (kakao_flutter_sdk v2+) -->
         <activity
-            android:name="com.kakao.sdk.flutter.AuthCodeCustomTabsActivity"
+            android:name="com.kakao.sdk.flutter.auth.AuthCodeHandlerActivity"
             android:exported="true">
             <intent-filter android:label="flutter_web_auth">
                 <action android:name="android.intent.action.VIEW" />

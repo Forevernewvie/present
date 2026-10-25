@@ -306,8 +306,8 @@ void main() {
       expect(content, contains('android.intent.action.TTS_SERVICE'),
           reason: 'Android 11+ requires TTS_SERVICE in queries for Text-to-Speech engines');
 
-      // 3. 카카오 로그인 리다이렉트 액티비티 검증
-      expect(content, contains('com.kakao.sdk.flutter.AuthCodeCustomTabsActivity'));
+      // 3. 카카오 로그인 리다이렉트 액티비티 검증 (kakao_flutter_sdk v2+)
+      expect(content, contains('com.kakao.sdk.flutter.auth.AuthCodeHandlerActivity'));
       expect(content, contains('kakao\${KAKAO_NATIVE_APP_KEY}'));
     });
 

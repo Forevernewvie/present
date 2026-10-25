@@ -114,6 +114,21 @@ class AuthNotifier extends AsyncNotifier<UserModel?> {
       state = AsyncData(finalUserModel);
     } catch (e, st) {
       debugPrint('카카오 로그인 연동 에러: $e');
+      final errStr = e.toString();
+      if (_supabase != null &&
+          (errStr.contains('SocketException') ||
+           errStr.contains('Failed host lookup'))) {
+        debugPrint('Supabase 네트워크 연결 불가 감지: 카카오 인증 세션($kakaoId)으로 오프라인 폴백 로그인 수행');
+        state = AsyncData(
+          UserModel(
+            id: 'kakao_$kakaoId',
+            kakaoId: kakaoId,
+            name: nickname ?? '카카오 사용자',
+            createdAt: DateTime.now(),
+          ),
+        );
+        return;
+      }
       state = AsyncError(e, st);
     }
   }
