@@ -1,4 +1,4 @@
-package com.present.present_app
+package com.presentcare.app
 
 import io.flutter.embedding.android.FlutterActivity
 
