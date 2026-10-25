@@ -349,8 +349,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         onTap: () => _showPolicyDialog(
                           context,
                           '서비스 이용약관',
-                          '제1조 (목적)\n본 약관은 Present가 제공하는 시니어 AI 말벗 대화 서비스의 이용 조건 및 절차를 규정합니다.\n\n'
-                          '제2조 (서비스 내용)\n인공지능 기반의 따뜻한 음성 대화 및 캘린더 기록 보관 기능을 제공합니다.',
+                          '제1조 (목적)\n본 약관은 Present(com.presentcare.app)가 제공하는 시니어 AI 말벗 대화 서비스의 이용 조건 및 절차를 규정합니다.\n\n'
+                          '제2조 (서비스 내용)\n실시간 음성 대화(STT/TTS), 일자별 대화 요약 및 달력형 대화 기록 보관 기능을 제공합니다.\n\n'
+                          '제3조 (의료·전문 상담 면책)\n본 서비스는 일상 말벗 및 정서적 위로를 위한 생활 복지 서비스이며, 전문적인 의료·약학·법률 자문을 제공하거나 대체하지 않습니다.\n\n'
+                          '제4조 (AI 생성 콘텐츠 신고 제도)\n이용자는 대화 중 부적절하거나 불쾌한 AI 응답을 발견한 경우 앱 내 [설정 > 부적절한 AI 답변 신고] 또는 대화 상세 화면의 [신고] 버튼을 통해 즉시 신고할 수 있습니다.\n\n'
+                          '제5조 (계정 해지 및 데이터 영구 파기)\n이용자는 앱 내 [설정 > 회원 탈퇴] 또는 고객지원(cjb11055@naver.com)을 통해 언제든지 계정 및 모든 데이터를 즉시 영구 삭제할 수 있습니다.',
                           webUrl: Env.termsOfServiceUrl,
                         ),
                         child: Text(
@@ -371,9 +374,16 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         onTap: () => _showPolicyDialog(
                           context,
                           '개인정보처리방침',
-                          'Present 개인정보처리방침 요약:\n\n'
-                          '1. 음성 데이터: 마이크로 입력된 음성은 기기 내에서 텍스트로 변환 즉시 파기되며 음성 파일 원본은 서버에 저장되지 않습니다.\n\n'
-                          '2. 계정 탈퇴: 이용자는 앱 내 설정에서 언제든지 회원 탈퇴 및 데이터 영구 삭제를 요청할 수 있습니다.',
+                          'Present(com.presentcare.app) 개인정보처리방침:\n\n'
+                          '1. 수집 항목: 카카오 로그인 식별자(ID) 및 닉네임, 음성에서 변환된 대화 텍스트(STT 결과) 및 대화 일시.\n\n'
+                          '2. 마이크(음성) 원본 미보관 원칙: 마이크로 입력된 실제 오디오 음성 파일은 기기 내 STT 엔진을 통해 텍스트로 변환된 즉시 메모리에서 완전 폐기되며, 음성 파일 원본은 서버로 전송되거나 저장되지 않습니다.\n\n'
+                          '3. 앱 접근 권한 안내:\n'
+                          '• 마이크(RECORD_AUDIO): AI 음성 대화 시 발화 인식(필수)\n'
+                          '• 블루투스/오디오(BLUETOOTH_CONNECT, MODIFY_AUDIO_SETTINGS): 무선 이어폰·스피커 오디오 출력 제어(선택, 위치 추적 미사용)\n'
+                          '• 인터넷(INTERNET): 로그인 및 AI 대화 암호화(HTTPS) 통신(필수)\n\n'
+                          '4. 제3자 처리 위탁: Supabase Inc.(DB/인증 호스팅), OpenAI L.L.C. 및 Google LLC(AI 대화 응답 생성), (주)카카오(소셜 로그인 연동).\n\n'
+                          '5. 계정 및 데이터 즉시 삭제(회원 탈퇴): 앱 내 [설정 > 회원 탈퇴] 선택 시 유예 기간 없이 계정 및 모든 대화 기록이 즉시 영구 파기됩니다. 앱 삭제 후에는 cjb11055@naver.com 또는 웹 계정 삭제 안내 페이지를 통해 삭제를 요청할 수 있습니다.\n\n'
+                          '6. 개인정보 보호책임자 및 문의처: Present 운영팀 (cjb11055@naver.com)',
                           webUrl: Env.privacyPolicyUrl,
                         ),
                         child: Text(

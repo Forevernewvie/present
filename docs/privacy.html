@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Present (com.presentcare.app) 개인정보처리방침 - 시니어 맞춤형 AI 말벗 대화 서비스">
   <title>개인정보처리방침 - Present</title>
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
@@ -151,6 +152,7 @@
       <nav>
         <a href="privacy.html" class="active">개인정보처리방침</a>
         <a href="terms.html">이용약관</a>
+        <a href="delete-account.html">계정 삭제 안내</a>
       </nav>
     </div>
   </header>
@@ -158,52 +160,74 @@
   <main>
     <div class="policy-card">
       <h1>Present 개인정보처리방침</h1>
-      <div class="meta-date">시행일자: 2026년 9월 29일</div>
+      <div class="meta-date">시행일자: 2026년 9월 29일 (최종 개정: 2026년 10월 25일) | 앱 패키지명: com.presentcare.app</div>
 
-      <p>'Present'(이하 '서비스' 또는 '앱')은 이용자의 개인정보를 소중하게 생각하며, 「개인정보 보호법」 및 관련 법령을 준수합니다. 본 방침은 서비스가 이용자의 개인정보를 어떻게 수집, 이용, 보관 및 파기하는지 투명하게 안내합니다.</p>
+      <p>'Present'(패키지 식별자: <code>com.presentcare.app</code>, 이하 '서비스' 또는 '앱')는 이용자의 개인정보를 소중하게 생각하며, 「개인정보 보호법」 및 Google Play 개발자 프로그램 정책(사용자 데이터 정책)을 엄격히 준수합니다. 본 방침은 서비스가 이용자의 개인정보 및 기기 권한을 어떻게 수집, 이용, 보관 및 파기하는지 투명하게 안내합니다.</p>
 
       <h2>1. 수집하는 개인정보 항목 및 수집 방법</h2>
       <h3>(1) 수집 항목</h3>
       <ul>
-        <li><strong>소셜 로그인 시(카카오)</strong>: 카카오 계정 고유 식별자(ID), 닉네임, 프로필 이미지 URL (선택)</li>
+        <li><strong>소셜 로그인 시(카카오 로그인)</strong>: 카카오 계정 고유 식별자(ID), 닉네임(또는 표시 이름)</li>
         <li><strong>음성 대화 서비스 이용 시</strong>:
           <ul>
             <li>이용자가 마이크를 통해 발화한 음성으로부터 변환된 <strong>텍스트(STT 변환 결과)</strong></li>
-            <li>AI 비서와의 상담 및 대화 내역 (대화 일시, 메시지 내용, 선택한 페르소나)</li>
+            <li>AI 말벗과의 대화 내역 및 일자별 대화 요약 텍스트 (대화 일시, 메시지 내용, 선택한 호칭/페르소나)</li>
           </ul>
         </li>
-        <li><strong>서비스 이용 과정에서 자동 생성되는 정보</strong>: 기기 식별자, OS 버전, 접속 로그, 서비스 이용 기록</li>
+        <li><strong>서비스 이용 과정에서 자동 처리되는 정보</strong>: 앱 내부 세션 식별자(UUID), 오류 진단 로그</li>
       </ul>
 
       <div class="highlight-box">
-        <strong>🔒 마이크(음성) 데이터 수집 및 처리 원칙</strong>
-        <p style="margin-top: 6px; margin-bottom: 0;">앱은 대화 시 사용자의 마이크를 활성화하여 음성을 인식합니다. <strong>발화된 실제 오디오 음성 파일(WAV/MP3 등)은 서버로 전송되거나 서버에 영구 저장되지 않으며, 기기 내 음성 엔진(STT)을 통해 텍스트로 변환된 즉시 메모리에서 완전히 폐기</strong>됩니다.</p>
+        <strong>🔒 마이크(음성) 데이터 수집 및 처리 원칙 (원본 미보관)</strong>
+        <p style="margin-top: 6px; margin-bottom: 0;">앱은 이용자가 대화 시작 버튼을 누른 경우에만 마이크(<code>RECORD_AUDIO</code>)를 활성화하여 음성을 인식합니다. <strong>발화된 실제 오디오 음성 파일(WAV/MP3 등)은 외부 서버로 전송되거나 서버에 영구 저장되지 않으며, 기기 내 음성 인식 엔진(STT)을 통해 텍스트로 변환된 즉시 메모리에서 완전히 폐기</strong>됩니다.</p>
       </div>
 
       <h3>(2) 수집 방법</h3>
       <ul>
-        <li>카카오 소셜 로그인을 통한 이용자 정보 수집</li>
-        <li>앱 내 음성 대화 기능 이용 시 이용자의 동의 기반 마이크 권한 획득 후 텍스트 변환</li>
+        <li>카카오(Kakao) OAuth 소셜 로그인 연동을 통한 이용자 동의 기반 수집</li>
+        <li>앱 내 음성 대화 시작 시 이용자의 명시적 마이크 권한 허용 후 실시간 텍스트 변환</li>
       </ul>
 
-      <h2>2. 개인정보의 수집 및 이용 목적</h2>
-      <p>서비스는 다음의 목적을 위해서만 개인정보를 처리하며, 목적 이외의 용도로는 사용되지 않습니다.</p>
+      <h2>2. 앱 접근 권한(퍼미션) 안내</h2>
+      <p>서비스는 원활한 AI 음성 말벗 기능 제공을 위해 아래와 같은 최소한의 안드로이드/iOS 시스템 권한만을 사용합니다.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>권한 명칭</th>
+            <th>필수/선택</th>
+            <th>사용 목적 및 상세 설명</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>마이크</strong><br>(<code>RECORD_AUDIO</code>)</td>
+            <td>필수<br>(대화 이용 시)</td>
+            <td>사용자의 말소리를 텍스트(STT)로 변환하여 AI와 음성 대화를 나누기 위해 사용합니다. 백그라운드에서는 절대 녹음하지 않으며, 음성 원본 파일은 저장하지 않습니다.</td>
+          </tr>
+          <tr>
+            <td><strong>블루투스 및 오디오 설정</strong><br>(<code>BLUETOOTH</code>, <code>BLUETOOTH_CONNECT</code>, <code>MODIFY_AUDIO_SETTINGS</code>)</td>
+            <td>선택</td>
+            <td>무선 이어폰·보청기·블루투스 스피커 연결 및 AI 음성 답변(TTS) 볼륨/출력 경로 제어에만 사용합니다. <strong>주변 기기 탐색을 통한 물리적 위치 추적으로는 일절 사용하지 않습니다.</strong></td>
+          </tr>
+          <tr>
+            <td><strong>인터넷 네트워크</strong><br>(<code>INTERNET</code>)</td>
+            <td>필수</td>
+            <td>카카오 로그인 인증, AI 대화 응답 생성, 달력형 대화 기록의 안전한 암호화(HTTPS) 동기화를 위해 사용합니다.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>3. 개인정보의 수집 및 이용 목적</h2>
+      <p>서비스는 다음의 목적을 위해서만 개인정보를 처리하며, 목적 이외의 용도로는 이용하거나 외부에 판매·공유하지 않습니다.</p>
       <ol>
-        <li><strong>시니어 맞춤형 AI 말벗 대화 서비스 제공</strong>: 이용자의 발화 텍스트에 부합하는 다정하고 따뜻한 AI 맞춤 답변 생성</li>
-        <li><strong>대화 이력 및 캘린더 기록 보관</strong>: 이용자가 지난 대화 내용을 날짜별 달력 형태로 다시 확인할 수 있도록 서비스 내 보관</li>
-        <li><strong>사용자 식별 및 멀티 유저 데이터 격리</strong>: 이용자별 고유 ID를 통한 안전한 계정 관리 및 타인과의 데이터 접근 차단</li>
-        <li><strong>서비스 품질 개선 및 오류 수정</strong>: 앱 비정상 종료(Crash) 대응 및 시스템 안정화</li>
+        <li><strong>시니어 맞춤형 AI 말벗 대화 서비스 제공</strong>: 이용자의 발화 텍스트에 부합하는 다정하고 따뜻한 AI 맞춤 답변 및 음성(TTS) 제공</li>
+        <li><strong>대화 이력 및 캘린더 기록 보관</strong>: 이용자가 지난 대화 내용과 요약을 날짜별 달력 형태로 다시 확인할 수 있도록 보관</li>
+        <li><strong>사용자 식별 및 멀티 유저 데이터 격리</strong>: 이용자별 고유 ID 및 Row Level Security(RLS)를 통한 안전한 계정 관리 및 타인의 데이터 접근 원천 차단</li>
+        <li><strong>AI 안전성 확보 및 부적절한 콘텐츠 신고 처리</strong>: 앱 내 AI 답변 신고 접수 및 서비스 품질 개선</li>
       </ol>
 
-      <h2>3. 개인정보의 보유 및 이용 기간</h2>
-      <ul>
-        <li><strong>보유 기간</strong>: 이용자가 서비스 회원 탈퇴를 요청하거나 계정을 삭제할 때까지 보관합니다.</li>
-        <li><strong>즉시 파기</strong>: 회원 탈퇴 시 이용자의 모든 대화 이력과 식별 정보는 데이터베이스에서 지체 없이 영구 삭제됩니다.</li>
-        <li><strong>로컬 캐시 삭제</strong>: 이용자는 앱 내 로그아웃을 통해 기기에 임시 보관된 로컬 대화 캐시를 언제든지 즉시 삭제할 수 있습니다.</li>
-      </ul>
-
       <h2>4. 개인정보의 제3자 제공 및 처리 위탁</h2>
-      <p>서비스는 원칙적으로 이용자의 개인정보를 제3자에게 무단 제공하지 않습니다. 단, 원활한 서비스 제공을 위해 다음의 전문 인프라에 처리를 위탁하고 있습니다.</p>
+      <p>서비스는 원칙적으로 이용자의 개인정보를 제3자에게 무단 제공하지 않습니다. 단, 원활한 AI 대화 추론 및 클라우드 데이터베이스 보관을 위해 아래와 같이 신뢰할 수 있는 전문 인프라에 처리를 위탁하고 있습니다.</p>
       <table>
         <thead>
           <tr>
@@ -215,46 +239,69 @@
         <tbody>
           <tr>
             <td><strong>Supabase Inc.</strong></td>
-            <td>데이터베이스(PostgreSQL) 호스팅, 인증(Auth) 관리</td>
-            <td>회원 탈퇴 시 또는 계약 종료 시까지</td>
+            <td>클라우드 데이터베이스(PostgreSQL) 호스팅 및 사용자 인증(Auth) 세션 관리</td>
+            <td>회원 탈퇴 시 즉시 영구 삭제</td>
+          </tr>
+          <tr>
+            <td><strong>OpenAI, L.L.C. (OpenAI API)</strong></td>
+            <td>시니어 맞춤 대화 응답 및 요약 생성을 위한 AI 언어 모델 추론</td>
+            <td>API 응답 생성 후 모델 학습에 사용되지 않으며 정책에 따라 즉시/단기 폐기</td>
           </tr>
           <tr>
             <td><strong>Google LLC (Gemini API)</strong></td>
-            <td>시니어 맞춤 대화 생성을 위한 AI 언어 모델 추론</td>
-            <td>대화 추론 즉시 폐기 (학습용 저장 없음)</td>
+            <td>AI 대화 응답 생성을 위한 보조/대체 언어 모델 추론</td>
+            <td>대화 추론 즉시 폐기</td>
           </tr>
           <tr>
-            <td><strong>카카오 (Kakao Corp.)</strong></td>
-            <td>소셜 로그인 및 사용자 본인 식별</td>
-            <td>회원 탈퇴 시까지</td>
+            <td><strong>(주)카카오 (Kakao Corp.)</strong></td>
+            <td>카카오 소셜 로그인 및 사용자 본인 식별 연동</td>
+            <td>회원 탈퇴 또는 연동 해제 시까지</td>
           </tr>
         </tbody>
       </table>
 
-      <h2>5. 이용자의 권리와 행사 방법</h2>
+      <h2 id="account-deletion">5. 개인정보의 보유·이용 기간 및 계정 삭제(회원 탈퇴) 방법</h2>
+      <ul>
+        <li><strong>보유 기간</strong>: 이용자가 서비스를 이용하는 동안 보관하며, <strong>회원 탈퇴(계정 삭제) 요청 시 유예 기간 없이 즉시 영구 파기</strong>합니다.</li>
+        <li><strong>앱 내 즉시 탈퇴 방법</strong>:
+          <ol>
+            <li><strong>Present</strong> 앱 실행 후 메인 화면 우측 상단의 <strong>[설정(⚙️)]</strong> 아이콘을 터치합니다.</li>
+            <li>하단의 빨간색 <strong>[회원 탈퇴]</strong> 버튼을 터치한 뒤 확인창에서 <strong>[탈퇴 및 데이터 삭제]</strong>를 선택합니다.</li>
+            <li>즉시 카카오 연동이 해제되며, 서버(Supabase DB)에 저장된 계정 프로필(<code>users</code>)과 모든 대화 내역(<code>conversations</code>), 기기 내 로컬 캐시가 복구 불가능한 방식으로 즉시 영구 삭제됩니다.</li>
+          </ol>
+        </li>
+        <li><strong>앱 삭제 후 웹/이메일을 통한 계정 및 데이터 삭제 요청</strong>:
+          <p>이미 앱을 삭제하여 앱 내 탈퇴가 어려운 경우, 전용 <a href="delete-account.html" style="color: var(--primary-color); font-weight: 700;">계정 및 데이터 삭제 안내 페이지</a>를 참조하시거나 아래 개인정보 보호책임자 이메일(<a href="mailto:cjb11055@naver.com">cjb11055@naver.com</a>)로 가입 시 사용한 카카오 닉네임(또는 카카오 계정 이메일)을 기재하여 삭제를 요청하실 수 있습니다. 접수 후 48시간 이내에 모든 데이터를 영구 파기하고 결과를 회신해 드립니다.</p>
+        </li>
+      </ul>
+
+      <h2>6. 이용자의 권리와 행사 방법</h2>
       <p>이용자는 언제든지 다음과 같은 권리를 행사할 수 있습니다:</p>
       <ul>
-        <li>본인의 개인정보 열람 및 오류 정정 요구</li>
-        <li>대화 기록 삭제 및 계정 탈퇴(개인정보 영구 삭제) 요구</li>
-        <li>마이크 권한 및 음성 인식 권한의 철회 (스마트폰 [설정] &gt; [앱] &gt; [Present] &gt; [권한]에서 거부 가능)</li>
+        <li>본인의 개인정보 및 대화 내역 열람</li>
+        <li>로그아웃을 통한 기기 내 로컬 대화 캐시 즉시 초기화</li>
+        <li>회원 탈퇴를 통한 계정 및 모든 서버 데이터 영구 삭제 요구</li>
+        <li>마이크 및 블루투스 권한 철회 (스마트폰 <strong>[설정] &gt; [애플리케이션] &gt; [Present] &gt; [권한]</strong>에서 언제든 허용/거부 변경 가능)</li>
       </ul>
 
-      <h2>6. 개인정보의 기술적·관리적 보호 조치</h2>
+      <h2>7. 개인정보의 기술적·관리적 보호 조치</h2>
       <ul>
-        <li><strong>전송 구간 암호화</strong>: 모든 네트워크 통신은 HTTPS/TLS 표준 암호화 통신을 적용합니다.</li>
-        <li><strong>데이터베이스 암호화 및 격리</strong>: 사용자 데이터는 Row Level Security(RLS) 및 사용자별 고유 UUID 격리를 통해 철저히 분리 보관됩니다.</li>
-        <li><strong>API 키 은닉</strong>: AI 호출용 키는 클라이언트에 직접 노출되지 않고 안전한 백엔드 환경에서만 보호됩니다.</li>
+        <li><strong>전송 구간 암호화</strong>: 모든 클라이언트-서버 간 네트워크 통신은 HTTPS/TLS 표준 암호화 통신을 적용합니다.</li>
+        <li><strong>데이터베이스 암호화 및 격리</strong>: 사용자 데이터는 Row Level Security(RLS) 정책 및 사용자별 고유 UUID 격리를 통해 본인 외에는 누구도 열람할 수 없도록 철저히 분리 보관됩니다.</li>
+        <li><strong>음성 원본 비보관</strong>: 민감할 수 있는 실제 목소리 오디오 파일은 서버로 전송하거나 디스크에 기록하지 않습니다.</li>
       </ul>
 
-      <h2>7. 개인정보 보호책임자 및 문의처</h2>
+      <h2>8. 개인정보 보호책임자 및 문의처</h2>
+      <p>서비스 이용 중 개인정보 보호 관련 문의, 불만 처리, 계정 삭제 요청 등은 아래 연락처로 문의해 주시면 신속하고 성실하게 답변드리겠습니다.</p>
       <ul>
-        <li><strong>책임자/담당자</strong>: Present 운영팀</li>
-        <li><strong>문의 이메일</strong>: support@present-app.internal</li>
-        <li><strong>응대 시간</strong>: 평일 10:00 ~ 18:00 (공휴일 제외)</li>
+        <li><strong>서비스명 / 패키지명</strong>: Present (<code>com.presentcare.app</code>)</li>
+        <li><strong>책임자 / 운영주체</strong>: Present 개발·운영팀 (Forevernewvie)</li>
+        <li><strong>문의 및 삭제 요청 이메일</strong>: <a href="mailto:cjb11055@naver.com">cjb11055@naver.com</a></li>
+        <li><strong>응대 시간</strong>: 평일 10:00 ~ 18:00 (주말·공휴일 이메일 상시 접수)</li>
       </ul>
 
       <footer>
-        &copy; 2026 Present. All rights reserved.
+        &copy; 2026 Present (com.presentcare.app). All rights reserved.
       </footer>
     </div>
   </main>

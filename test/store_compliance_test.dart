@@ -80,10 +80,24 @@ void main() {
       expect(find.text('개인정보처리방침'), findsOneWidget);
       expect(find.text('서비스 이용약관'), findsOneWidget);
 
+      // Google Play AI 생성 콘텐츠 정책 필수 요건: 부적절한 AI 답변 신고 기능 확인
+      expect(find.text('부적절한 AI 답변 신고'), findsOneWidget);
+      await tester.ensureVisible(find.text('부적절한 AI 답변 신고'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('부적절한 AI 답변 신고'));
+      await tester.pumpAndSettle();
+      expect(find.text('신고 접수'), findsOneWidget);
+      await tester.tap(find.text('신고 접수'));
+      await tester.pumpAndSettle();
+
       // 로그아웃 버튼 확인
+      await tester.ensureVisible(find.text('로그아웃'));
+      await tester.pumpAndSettle();
       expect(find.text('로그아웃'), findsOneWidget);
 
       // 필수 요구사항: 회원 탈퇴(계정 삭제) 버튼 확인
+      await tester.ensureVisible(find.text('회원 탈퇴'));
+      await tester.pumpAndSettle();
       expect(find.text('회원 탈퇴'), findsOneWidget);
 
       // 회원 탈퇴 버튼 탭 시 경고 확인창 노출 확인

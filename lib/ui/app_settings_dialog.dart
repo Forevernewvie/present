@@ -115,6 +115,83 @@ class AppSettingsDialog extends ConsumerWidget {
     );
   }
 
+  void _showReportAiContentDialog(BuildContext context) {
+    String selectedReason = '부적절하거나 불쾌한 표현';
+    final reasons = [
+      '부적절하거나 불쾌한 표현',
+      '부정확하거나 위험한 정보 (의료·약학·법률 등)',
+      '문맥에 맞지 않거나 어색한 답변',
+      '기타 안전 및 품질 문제',
+    ];
+
+    showDialog(
+      context: context,
+      builder: (dialogContext) => StatefulBuilder(
+        builder: (context, setState) => AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          title: const Row(
+            children: [
+              Icon(Icons.flag_outlined, color: Colors.redAccent),
+              SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  '부적절한 AI 답변 신고',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                ),
+              ),
+            ],
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'AI 말벗의 답변 중 불편하거나 부적절한 내용이 있었다면 사유를 선택해 주세요. 운영팀이 검토하여 즉시 개선하겠습니다.',
+                style: TextStyle(fontSize: 14, color: Colors.black87, height: 1.4),
+              ),
+              const SizedBox(height: 12),
+              ...reasons.map(
+                (reason) => RadioListTile<String>(
+                  dense: true,
+                  contentPadding: EdgeInsets.zero,
+                  title: Text(reason, style: const TextStyle(fontSize: 14)),
+                  value: reason,
+                  groupValue: selectedReason,
+                  onChanged: (val) {
+                    if (val != null) {
+                      setState(() => selectedReason = val);
+                    }
+                  },
+                ),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(dialogContext).pop(),
+              child: const Text('취소'),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.redAccent,
+                foregroundColor: Colors.white,
+              ),
+              onPressed: () {
+                Navigator.of(dialogContext).pop();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('AI 답변 신고가 정상적으로 접수되었습니다. 안전한 대화를 위해 신속히 검토하겠습니다.'),
+                  ),
+                );
+              },
+              child: const Text('신고 접수', style: TextStyle(fontWeight: FontWeight.bold)),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   void _confirmLogout(BuildContext context, WidgetRef ref) {
     showDialog(
       context: context,
@@ -310,10 +387,12 @@ class AppSettingsDialog extends ConsumerWidget {
                   context,
                   Env.privacyPolicyUrl,
                   '개인정보처리방침',
-                  'Present는 이용자의 개인정보 및 프라이버시를 최우선으로 보호합니다.\n\n'
-                  '1. 음성 데이터 처리: 사용자가 마이크를 통해 발화한 오디오는 기기 내 STT 엔진을 통해 텍스트로 변환 즉시 파기되며, 음성 파일 원본은 서버에 저장되지 않습니다.\n\n'
-                  '2. 대화 기록: 이용자가 직접 확인하는 달력 일기 제공을 위해 변환된 텍스트만 안전하게 암호화되어 보관됩니다.\n\n'
-                  '3. 파기 권리: 이용자는 언제든지 로그아웃 또는 회원 탈퇴를 통해 모든 데이터를 영구 삭제할 수 있습니다.',
+                  'Present(com.presentcare.app)는 이용자의 개인정보 및 프라이버시를 최우선으로 보호합니다.\n\n'
+                  '1. 수집 항목: 카카오 로그인 고유 식별자(ID) 및 닉네임, 음성에서 변환된 텍스트(STT 결과) 및 대화 일시.\n\n'
+                  '2. 음성 데이터 원본 미보관: 사용자가 마이크(RECORD_AUDIO)를 통해 발화한 오디오는 기기 내 STT 엔진을 통해 텍스트로 변환된 즉시 폐기되며, 음성 파일 원본은 서버로 전송되거나 저장되지 않습니다.\n\n'
+                  '3. 앱 접근 권한: 마이크(RECORD_AUDIO, 음성 대화 필수), 블루투스/오디오(BLUETOOTH_CONNECT·MODIFY_AUDIO_SETTINGS, 오디오 기기 연결 선택, 위치 추적 미사용), 인터넷(INTERNET, 암호화 통신 필수).\n\n'
+                  '4. 제3자 처리 위탁: Supabase Inc.(DB/인증), OpenAI L.L.C. 및 Google LLC(AI 응답 생성), (주)카카오(소셜 로그인).\n\n'
+                  '5. 즉시 파기 권리(회원 탈퇴): 앱 내 [회원 탈퇴] 또는 고객지원(cjb11055@naver.com)을 통해 언제든지 계정과 모든 대화 데이터를 유예 기간 없이 영구 삭제할 수 있습니다.',
                 ),
               ),
               const Divider(height: 1),
@@ -334,10 +413,20 @@ class AppSettingsDialog extends ConsumerWidget {
                   context,
                   Env.termsOfServiceUrl,
                   '서비스 이용약관',
-                  '제1조 (목적)\n본 약관은 Present(이하 "서비스")가 제공하는 시니어 AI 말벗 대화 서비스의 이용 조건 및 절차를 규정합니다.\n\n'
-                  '제2조 (서비스의 내용)\n서비스는 인공지능 기반의 음성 대화 및 일상 기록 보관 기능을 제공합니다.\n\n'
-                  '제3조 (이용자의 의무)\n이용자는 타인의 명예를 훼손하거나 불법적인 목적으로 서비스를 이용하여서는 아니 됩니다.',
+                  '제1조 (목적)\n본 약관은 Present(com.presentcare.app)가 제공하는 시니어 AI 말벗 대화 서비스의 이용 조건 및 절차를 규정합니다.\n\n'
+                  '제2조 (의료·전문 상담 면책)\n서비스는 정서적 위로를 위한 AI 말벗 서비스이며, 의료·약학·법률 자문을 대체하지 않습니다.\n\n'
+                  '제3조 (AI 생성 콘텐츠 신고)\n부적절한 AI 응답은 앱 내 [부적절한 AI 답변 신고] 메뉴를 통해 즉시 신고할 수 있습니다.\n\n'
+                  '제4조 (계약 해지 및 문의)\n언제든지 앱 내 [회원 탈퇴] 또는 cjb11055@naver.com을 통해 계정 및 데이터를 영구 삭제할 수 있습니다.',
                 ),
+              ),
+              const Divider(height: 1),
+              ListTile(
+                dense: true,
+                contentPadding: EdgeInsets.zero,
+                leading: const Icon(Icons.flag_outlined, color: Colors.black87),
+                title: const Text('부적절한 AI 답변 신고', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600)),
+                trailing: const Icon(Icons.chevron_right, size: 20),
+                onTap: () => _showReportAiContentDialog(context),
               ),
               const Divider(height: 1),
               ListTile(

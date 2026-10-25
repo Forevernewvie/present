@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Present (com.presentcare.app) 계정 및 데이터 삭제 안내">
+  <title>계정 및 데이터 삭제 안내 - Present</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+  <style>
+    :root {
+      --primary-color: #2E7D32;
+      --primary-light: #E8F5E9;
+      --danger-color: #C62828;
+      --danger-light: #FFEBEE;
+      --text-color: #212529;
+      --text-muted: #6C757D;
+      --bg-color: #F8F9FA;
+      --card-bg: #FFFFFF;
+      --border-color: #E9ECEF;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+      line-height: 1.7;
+      color: var(--text-color);
+      background-color: var(--bg-color);
+    }
+    header {
+      background-color: var(--card-bg);
+      border-bottom: 1px solid var(--border-color);
+      padding: 20px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .header-container {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary-color);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    nav a {
+      font-size: 14px;
+      color: var(--text-muted);
+      text-decoration: none;
+      margin-left: 16px;
+      font-weight: 500;
+    }
+    nav a.active {
+      color: var(--primary-color);
+      font-weight: 700;
+    }
+    main {
+      max-width: 800px;
+      margin: 32px auto;
+      padding: 0 20px 60px;
+    }
+    .policy-card {
+      background: var(--card-bg);
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      border: 1px solid var(--border-color);
+    }
+    h1 {
+      font-size: 26px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: #111;
+    }
+    .meta-date {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    h2 {
+      font-size: 19px;
+      font-weight: 700;
+      margin: 28px 0 12px;
+      color: var(--primary-color);
+      border-left: 4px solid var(--primary-color);
+      padding-left: 10px;
+    }
+    p, li {
+      font-size: 15px;
+      margin-bottom: 12px;
+      color: #333;
+    }
+    ul, ol {
+      padding-left: 20px;
+      margin-bottom: 16px;
+    }
+    .step-box {
+      background-color: var(--primary-light);
+      border: 1px solid #C8E6C9;
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin: 16px 0;
+    }
+    .danger-box {
+      background-color: var(--danger-light);
+      border: 1px solid #FFCDD2;
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin: 16px 0;
+    }
+    .btn-mail {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 12px 20px;
+      background-color: var(--primary-color);
+      color: #fff;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 10px;
+      font-size: 15px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 14px;
+    }
+    th, td {
+      border: 1px solid var(--border-color);
+      padding: 10px 14px;
+      text-align: left;
+    }
+    th {
+      background-color: #F1F3F5;
+      font-weight: 600;
+    }
+    footer {
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 40px;
+      padding-top: 20px;
+    }
+    @media (max-width: 600px) {
+      .policy-card { padding: 24px 18px; }
+      h1 { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <a href="index.html" class="logo">🌿 Present</a>
+      <nav>
+        <a href="privacy.html">개인정보처리방침</a>
+        <a href="terms.html">이용약관</a>
+        <a href="delete-account.html" class="active">계정 삭제 안내</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="policy-card">
+      <h1>Present 계정 및 데이터 삭제 요청 안내</h1>
+      <div class="meta-date">앱 이름: Present (시니어 AI 말벗) | 패키지명: com.presentcare.app | 개발자: Forevernewvie</div>
+
+      <p><strong>Present</strong>(<code>com.presentcare.app</code>) 이용자는 언제든지 앱 내부에서 직접 계정을 즉시 삭제(회원 탈퇴)하거나, 앱을 이미 삭제한 경우 웹(이메일)을 통해 계정 및 모든 연관 데이터의 영구 삭제를 요청할 수 있습니다.</p>
+
+      <h2>방법 1. 앱 내에서 직접 즉시 삭제하기 (권장)</h2>
+      <div class="step-box">
+        <ol style="margin-bottom: 0;">
+          <li>스마트폰에서 <strong>Present</strong> 앱을 실행합니다.</li>
+          <li>메인 화면 우측 상단의 <strong>[설정(⚙️ 아이콘)]</strong> 버튼을 터치하여 <strong>[앱 설정 및 정보]</strong> 창을 엽니다.</li>
+          <li>창 하단 우측의 빨간색 <strong>[회원 탈퇴]</strong> 버튼을 터치합니다.</li>
+          <li>확인 안내창에서 <strong>[탈퇴 및 데이터 삭제]</strong> 버튼을 누르면 <strong>별도의 대기 기간 없이 즉시 계정과 모든 대화 데이터가 영구 삭제</strong>됩니다.</li>
+        </ol>
+      </div>
+
+      <h2>방법 2. 앱을 이미 삭제한 경우 웹(이메일)으로 삭제 요청하기</h2>
+      <p>기기에 앱이 설치되어 있지 않거나 로그인할 수 없는 상태라면, 아래 공식 지원 이메일로 계정 삭제를 요청하실 수 있습니다.</p>
+      <div class="danger-box">
+        <p><strong>📩 계정 삭제 요청 이메일 접수처</strong>: <a href="mailto:cjb11055@naver.com?subject=[Present%20계정%20삭제%20요청]&body=가입하신%20카카오%20닉네임%20또는%20이메일:%20">cjb11055@naver.com</a></p>
+        <ul style="margin-bottom: 8px;">
+          <li><strong>기재 사항</strong>: 가입 시 연동한 카카오 계정의 이메일 주소 또는 카카오 프로필 닉네임</li>
+          <li><strong>처리 기한</strong>: 요청 접수 후 <strong>최대 48시간 이내</strong> 영구 삭제 처리 완료 및 처리 결과 이메일 회신</li>
+        </ul>
+        <a class="btn-mail" href="mailto:cjb11055@naver.com?subject=[Present%20계정%20삭제%20요청]&body=가입하신%20카카오%20닉네임%20또는%20이메일:%20">이메일로 계정 삭제 요청 보내기</a>
+      </div>
+
+      <h2>삭제되는 데이터 및 보관 기간 안내</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>데이터 유형</th>
+            <th>삭제 범위 및 처리 방식</th>
+            <th>탈퇴 후 보관 기간</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>계정 식별 정보</strong><br>(카카오 고유 ID, 닉네임, 내부 UUID)</td>
+            <td>데이터베이스(<code>users</code> 테이블) 및 인증 세션에서 완전히 영구 삭제</td>
+            <td><strong>즉시 파기 (보관 기간 없음)</strong></td>
+          </tr>
+          <tr>
+            <td><strong>AI 대화 내역 및 요약 기록</strong><br>(달력 일기, 채팅 메시지 전문)</td>
+            <td>데이터베이스(<code>conversations</code> 테이블) 및 기기 로컬 캐시에서 완전히 영구 삭제</td>
+            <td><strong>즉시 파기 (보관 기간 없음)</strong></td>
+          </tr>
+          <tr>
+            <td><strong>음성 오디오 원본</strong></td>
+            <td>대화 당시 기기 내 STT 변환 즉시 폐기되므로 서버에 처음부터 존재하지 않음</td>
+            <td><strong>미수집 / 미보관</strong></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <footer>
+        &copy; 2026 Present (com.presentcare.app). All rights reserved.
+      </footer>
+    </div>
+  </main>
+</body>
+</html>

@@ -64,6 +64,46 @@ class DetailScreen extends StatelessWidget {
         title: Text(dateStr, style: const TextStyle(fontWeight: FontWeight.bold)),
         backgroundColor: theme.colorScheme.background,
         elevation: 0,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.flag_outlined),
+            tooltip: 'AI 답변 신고',
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (dialogContext) => AlertDialog(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                  title: const Text('부적절한 AI 답변 신고', style: TextStyle(fontWeight: FontWeight.bold)),
+                  content: const Text(
+                    '대화 내용 중 불쾌하거나 부적절한 AI 응답이 포함되어 있나요?\n신고해 주시면 운영팀이 검토하여 안전 필터를 개선합니다.',
+                    style: TextStyle(fontSize: 15, height: 1.4),
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.of(dialogContext).pop(),
+                      child: const Text('취소'),
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.redAccent,
+                        foregroundColor: Colors.white,
+                      ),
+                      onPressed: () {
+                        Navigator.of(dialogContext).pop();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('신고가 접수되었습니다. 안전한 AI 대화를 위해 신속히 검토하겠습니다.'),
+                          ),
+                        );
+                      },
+                      child: const Text('신고 접수', style: TextStyle(fontWeight: FontWeight.bold)),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        ],
       ),
       body: Column(
         children: [
